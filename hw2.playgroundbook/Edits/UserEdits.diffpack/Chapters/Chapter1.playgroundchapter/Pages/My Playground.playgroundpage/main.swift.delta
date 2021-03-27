@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+//задачка 1
+var c = 7
+func parity(value a: Int) {
+    a % 2 == 0 ? print("Число \(a) чётное") : print("Число \(a) не чётное")
+}
+parity(value: c)
+
+//задачка 2
+var d = 3
+func trio(value a: Int) {
+    a % 3 == 0 ? print("Число \(a) делится на 3 без остатка") : print("Число \(a) не делится на 3 без остатка")
+}
+trio(value: d)
+
+//задачка 3
+var Array: [Int] = []
+for i in 0...100 {
+    Array.append(i)
+}
+print(Array)
+
+//задачка 4
+var newMas: [Int] = []
+for i in Array {
+    if (i % 3) == 0 &amp;&amp; (i % 2) &gt; 0 {
+        newMas.append(i)
+    }
+}
+print(newMas)
+
+//задачка 5
+var masFib: [Int] = [0,1]
+
+func fibanachchi(mass: [Int]) -&gt; [Int] {
+    var sum = mass[mass.count-1] + mass[mass.count-2]
+    var masss = mass
+    masss.append(sum)
+    return masss
+} 
+
+for i in 0...49 {
+    masFib = fibanachchi(mass: masFib)
+}
+
+print(masFib)
+
+//задачка 6
+var newArr: [Int] = []
+for i in 2...100 {
+    newArr.append(i)
+}
+print(newArr)
+
+func Cleaner(array: [Int], p: Int) -&gt; [Int] {
+    var arrayClean: [Int] = []
+    for i in array {
+        if (i / p) == 1 || (i % p) &gt; 0 {
+            arrayClean.append(i)
+        }
+    }
+    return arrayClean
+}
+
+for i in newArr {
+    var p = i
+    newArr = Cleaner(array: newArr, p: p)
+}
+print(newArr)
+
+    
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 1242}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
