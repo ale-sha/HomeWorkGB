@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+
+enum act: String {
+    case open = "open"
+    case close = "close"
+}
+
+protocol Paper {
+    var name: String {get}
+    var percent: Int {get set}
+    var action: act {get set}
+    
+    func OpenClose() 
+}
+
+extension Paper {
+    func OpenClose() {
+        action.rawValue == act.open.rawValue ? print("\"\(name)\" открыта.") : print("\(name) закрыта.")
+    }
+
+    mutating func Read(action: act){
+        switch action {
+        case .open:
+            percent = self.percent + 5
+            print("Прочитанно \(percent) %")
+            self.action = .open
+        case .close:
+            self.action = .close
+        }
+    }
+}
+
+enum ValueUseBook: String {
+    case take = "взять"
+    case put = "положить"
+    case give = "подарить"
+}
+
+protocol Book: Paper {
+    var autor: String {get}
+    var data: Int {get}
+    var valueUse: ValueUseBook {get set}
+    
+    mutating func BookValueUse(valueUse: ValueUseBook)
+}
+
+extension Book {
+    mutating func BookValueUse(valueUse: ValueUseBook) {
+        self.valueUse = valueUse
+        print("\(valueUse.rawValue) \(name)")
+        }
+    }
+
+enum ValueUseMag: String {
+    case roll = "бить мух"
+    case sheet = "упс, чп"
+    case draw = "рисовать"
+}
+
+protocol Magazine: Paper {
+    var typeMag: String {get}
+    var page: Int {get set}
+}
+
+extension Magazine {
+    mutating func MagValueUse(value: ValueUseMag) {
+            if value.rawValue == ValueUseMag.roll.rawValue || value.rawValue == ValueUseMag.draw.rawValue {
+                print(" test")
+            } else {
+                self.page = page - 2
+                
+            }
+        }
+    }
+    
+class bo: Book {
+    var valueUse: ValueUseBook
+    var name: String
+    var percent: Int
+    let data: Int 
+    let autor: String
+    var action: act
+    
+    
+    init(name: String, percent: Int, data: Int, autor: String, action: act, valueUse: ValueUseBook) {
+        self.name = name
+        self.percent = percent
+        self.autor = autor
+        self.data = data
+        self.action = action
+        self.valueUse = valueUse
+    }
+}
+
+var Book1 = bo(name: "More", percent: 34, data: 1986, autor: "sd", action: .open, valueUse: .put)
+Book1.OpenClose()
+Book1.BookValueUse(valueUse: .put)
+Book1.Read(action: .open)
+Book1.Read(action: .close)
+Book1.Read(action: .open)
+
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 2298}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
