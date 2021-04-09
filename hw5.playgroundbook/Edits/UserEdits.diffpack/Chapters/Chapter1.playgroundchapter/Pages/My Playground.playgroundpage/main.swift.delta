@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+
+enum act: String {
+    case open = "открыта"
+    case close = "закрыта"
+}
+
+protocol Paper {
+    var name: String {get}
+    var percent: Int {get set}
+    var action: act {get set}
+    
+    func OpenClose() 
+}
+
+extension Paper {
+    func OpenClose() {
+        action.rawValue == act.open.rawValue ? print("\"\(name)\" открыта.") : print("\(name) закрыта.")
+    }
+    
+    mutating func Read(action: act){
+        switch action {
+        case .open:
+            percent = self.percent + 5
+            print("Прочитанно \(percent) %")
+            self.action = .open
+        case .close:
+            self.action = .close
+        }
+    }
+}
+
+enum ValueUseBook: String {
+    case take = "взять"
+    case put = "положить"
+    case give = "подарить"
+}
+
+protocol Book: Paper {
+    var autor: String {get}
+    var data: Int {get}
+    var valueUse: ValueUseBook {get set}
+    
+    mutating func BookValueUse(valueUse: ValueUseBook)
+}
+
+extension Book {
+    mutating func BookValueUse(valueUse: ValueUseBook) {
+        self.valueUse = valueUse
+        print("\(valueUse.rawValue) \(name)")
+    }
+}
+
+enum ValueUseMag: String {
+    case roll = "бить мух"
+    case sheet = "упс, чп"
+    case draw = "рисовать"
+}
+
+protocol Magazine: Paper {
+    var typeMag: String {get}
+    var page: Int {get set}
+}
+
+extension Magazine {
+    mutating func MagValueUse(value: ValueUseMag) {
+        if value.rawValue == ValueUseMag.roll.rawValue || value.rawValue == ValueUseMag.draw.rawValue {
+            print("Самое время начать \(value.rawValue)")
+        } else {
+            self.page = page - 2
+            print("Внимание! У вас осталось всего \(page) листов")
+        }
+    }
+}
+
+class bo: Book {
+    var valueUse: ValueUseBook
+    var name: String
+    var percent: Int
+    let data: Int 
+    let autor: String
+    var action: act
+    
+    
+    init(name: String, percent: Int, data: Int, autor: String, action: act, valueUse: ValueUseBook) {
+        self.name = name
+        self.percent = percent
+        self.autor = autor
+        self.data = data
+        self.action = action
+        self.valueUse = valueUse
+    }
+}
+
+extension bo: CustomStringConvertible {
+    var description: String {
+        return "Книга \"\(name)\" написана \(autor) в \(data) году. Книга сейчас \(action.rawValue) и прочитанана на \(percent)%."
+    }
+}
+
+class mag: Magazine {
+    var typeMag: String
+    var page: Int
+    var percent: Int
+    var action: act
+    var name: String
+    
+    init(typeMag: String, page: Int, percent: Int, action: act, name: String) {
+        self.typeMag = typeMag
+        self.page = page
+        self.percent = percent
+        self.action = action
+        self.name = name
+    }
+}
+
+extension mag: CustomStringConvertible {
+    var description: String {
+        return "\(typeMag) журнал \"\(name)\". Он сейчас \(action.rawValue) и прочитанан на \(percent)%."
+    }
+}
+
+var Book1 = bo(name: "Зоки и бада", percent: 34, data: 1990, autor: "И. и Л. Тюхтяевыми", action: .open, valueUse: .put)
+Book1.OpenClose()
+Book1.BookValueUse(valueUse: .put)
+Book1.Read(action: .open)
+Book1.Read(action: .close)
+Book1.Read(action: .open)
+print(Book1)
+
+var Magazine1 = mag(typeMag: "развлекательный", page: 30, percent: 23, action: .open, name: "Мурзилка")
+Magazine1.OpenClose()
+Magazine1.MagValueUse(value: .sheet)
+Magazine1.MagValueUse(value: .roll)
+Magazine1.MagValueUse(value: .sheet)
+print(Magazine1)
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 3394}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
