@@ -9,8 +9,8 @@
 			<string>import Foundation
 
 enum act: String {
-    case open = "open"
-    case close = "close"
+    case open = "открыта"
+    case close = "закрыта"
 }
 
 protocol Paper {
@@ -25,7 +25,7 @@ extension Paper {
     func OpenClose() {
         action.rawValue == act.open.rawValue ? print("\"\(name)\" открыта.") : print("\(name) закрыта.")
     }
-
+    
     mutating func Read(action: act){
         switch action {
         case .open:
@@ -56,8 +56,8 @@ extension Book {
     mutating func BookValueUse(valueUse: ValueUseBook) {
         self.valueUse = valueUse
         print("\(valueUse.rawValue) \(name)")
-        }
     }
+}
 
 enum ValueUseMag: String {
     case roll = "бить мух"
@@ -72,15 +72,15 @@ protocol Magazine: Paper {
 
 extension Magazine {
     mutating func MagValueUse(value: ValueUseMag) {
-            if value.rawValue == ValueUseMag.roll.rawValue || value.rawValue == ValueUseMag.draw.rawValue {
-                print(" test")
-            } else {
-                self.page = page - 2
-                
-            }
+        if value.rawValue == ValueUseMag.roll.rawValue || value.rawValue == ValueUseMag.draw.rawValue {
+            print("Самое время начать \(value.rawValue)")
+        } else {
+            self.page = page - 2
+            print("Внимание! У вас осталось всего \(page) листов")
         }
     }
-    
+}
+
 class bo: Book {
     var valueUse: ValueUseBook
     var name: String
@@ -100,20 +100,56 @@ class bo: Book {
     }
 }
 
-var Book1 = bo(name: "More", percent: 34, data: 1986, autor: "sd", action: .open, valueUse: .put)
+extension bo: CustomStringConvertible {
+    var description: String {
+        return "Книга \"\(name)\" написана \(autor) в \(data) году. Книга сейчас \(action.rawValue) и прочитанана на \(percent)%."
+    }
+}
+
+class mag: Magazine {
+    var typeMag: String
+    var page: Int
+    var percent: Int
+    var action: act
+    var name: String
+    
+    init(typeMag: String, page: Int, percent: Int, action: act, name: String) {
+        self.typeMag = typeMag
+        self.page = page
+        self.percent = percent
+        self.action = action
+        self.name = name
+    }
+}
+
+extension mag: CustomStringConvertible {
+    var description: String {
+        return "\(typeMag) журнал \"\(name)\". Он сейчас \(action.rawValue) и прочитанан на \(percent)%."
+    }
+}
+
+var Book1 = bo(name: "Зоки и бада", percent: 34, data: 1990, autor: "И. и Л. Тюхтяевыми", action: .open, valueUse: .put)
 Book1.OpenClose()
 Book1.BookValueUse(valueUse: .put)
 Book1.Read(action: .open)
 Book1.Read(action: .close)
 Book1.Read(action: .open)
+print(Book1)
 
+var Magazine1 = mag(typeMag: "развлекательный", page: 30, percent: 23, action: .open, name: "Мурзилка")
+Magazine1.OpenClose()
+Magazine1.MagValueUse(value: .sheet)
+Magazine1.MagValueUse(value: .roll)
+Magazine1.MagValueUse(value: .sheet)
+print(Magazine1)
 </string>
 			<key>ModifiedRange</key>
-			<string>{1, 2298}</string>
+			<string>{0, 3394}</string>
 			<key>OriginalContent</key>
-			<string></string>
+			<string>
+</string>
 			<key>OriginalRange</key>
-			<string>{1, 0}</string>
+			<string>{0, 1}</string>
 		</dict>
 	</array>
 	<key>File</key>
