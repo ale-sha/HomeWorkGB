@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+
+struct queue&lt;Element&gt; {
+    var numbers = [Element]()
+    
+    mutating func push(_ number: Element) {
+        numbers.append(number)
+    }
+    
+    mutating func invite() -&gt; Element {
+        return numbers.removeFirst()
+    }
+    
+    func filter() -&gt; [Element] {
+        var array = [Element]() 
+        for (i, n) in numbers.enumerated() {
+            if i % 2 == 0 {
+                array.append(n)
+            } 
+        }
+        return array
+    }
+    
+    func numbersCount() -&gt; Int {
+        return numbers.count
+    }
+    
+    subscript (index: Int) -&gt; Element? {
+        return (index &lt; numbers.count ? numbers[index] : nil)
+    }
+    
+}
+
+var queueOfZoo = queue&lt;String&gt;()
+
+queueOfZoo.push("cat")
+queueOfZoo.push("dog")
+queueOfZoo.push("cow")
+print("В очереди перед кабинетом ветеринара: \(queueOfZoo.numbers).")
+
+queueOfZoo.invite()
+print("Полсе вызова первого пациента в очереди остались: \(queueOfZoo.numbers).")
+
+queueOfZoo.push("Elephant")
+print("Подошёл ещё один пациент: \(queueOfZoo.numbers).")
+
+print("В очереди сейчас \(queueOfZoo.numbersCount()) пациента.")
+
+print("Внимание! Срочно пройти в кабинет всем нечётным пациентам: \(queueOfZoo.filter()).")
+
+print("Следующий пациент пройдите в кабинет - \(queueOfZoo[1]!)")
+print("Следующий пациент пройдите в кабинет - \(queueOfZoo[5])")
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 1324}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
