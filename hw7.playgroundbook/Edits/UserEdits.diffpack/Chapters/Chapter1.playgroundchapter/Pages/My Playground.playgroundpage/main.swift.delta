@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+
+struct Work {
+    var time: Int
+    var grade: Int
+}
+
+enum houseWorkMistake: Error {
+    case timeIsUp
+    case gradeInvalid
+    case noNameWork
+}
+
+class House {
+    var houseWork = [
+        "Убрать квартиру": Work(time: 90, grade: 5),
+        "Приготовить ужин": Work(time: 60, grade: 10),
+        "Сделать домашнее задание": Work(time: 150, grade: 10)
+    ]
+    
+    func timesWork(Task name: String) {
+        print("Вы хотите \(houseWork[name])")
+    }
+    
+    var maxTime = 120
+    let maxGrade = 7
+    
+    func doingHouseWork(nameWork name: String) throws {
+        guard let work = houseWork[name] else {
+            throw houseWorkMistake.noNameWork
+        }
+        guard work.grade &lt;= 10  else {
+            throw houseWorkMistake.gradeInvalid
+        }
+        guard work.time &lt; maxTime else{
+            throw houseWorkMistake.timeIsUp
+        }
+        
+        if work.grade &gt;= maxGrade {
+            print("Хорошо выполненная работа")
+        }
+    }
+}
+let likedWork = [
+    "Alena": "Убрать квартиру",
+    "Misha": "Приготовить ужин",
+    "Alisa": "Ничего не хочу делать"
+]
+
+func workHard(person: String, houseWork: House) throws {
+    let nameWorked = likedWork[person] ?? ""
+    try houseWork.doingHouseWork(nameWork: nameWorked)
+}
+
+var house = House()
+
+do {
+    try workHard(person: "Alena", houseWork: house)
+} catch houseWorkMistake.noNameWork {
+    print("Это не надо сегодня делать")
+} catch houseWorkMistake.gradeInvalid {
+    print("Вы не очень честны, максимум качества проделанной работы 10")
+} catch houseWorkMistake.timeIsUp {
+    print("Вы не успели сделать свою работу")
+}
+
+
+
+house.timesWork(Task: "Убрать квартру")
+house.doingHouseWork(nameWork: "Убрать квартиру")
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 1720}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
